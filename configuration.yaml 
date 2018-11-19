@@ -1,0 +1,314 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name:
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret home_lat
+  longitude: !secret home_long
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 175
+  # metric for Metric, imperial for Imperial
+  unit_system: imperial
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: America/Los_Angeles
+  # Customization file
+  customize: !include customize.yaml
+
+zone:
+  - name: Jeff's work
+    latitude: !secret jeffs_work_lat
+    longitude: !secret jeffs_work_long
+    icon: mdi:amazon
+  - name: Preschool
+    latitude: !secret preschool_lat
+    longitude: !secret preschool_long
+    icon: mdi:school
+  - name: !secret zone_3
+    latitude: !secret zone_3_lat
+    longitude: !secret zone_3_long
+    radius: 250
+    icon: mdi:cart
+
+
+# Enables the frontend
+frontend:
+  themes:
+    happy:
+      primary-color: black
+      background-color: black
+config:
+
+mqtt:
+  broker: !secret broker
+  port: !secret mqtt_port
+  client_id: !secret mqtt_client_id
+  username: !secret mqtt_username
+  password: !secret mqtt_password
+
+http:
+  # Secrets are defined in the file secrets.yaml
+  # api_password: !secret http_password
+  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+  # base_url: example.duckdns.org:8123
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+  ignore:
+    - samsung_tv
+    - plex_mediaserver
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+# Weather prediction
+sensor:
+  - platform: waze_travel_time
+    origin: !secret waze_origin
+    destination: !secret waze_destination
+    region: 'US'
+  - platform: speedtest
+    monitored_conditions:
+      - ping
+      - download
+      - upload
+  - platform: darksky
+    api_key: !secret dark_sky_api_key
+    update_interval:
+      minutes: 5
+    monitored_conditions:
+      - minutely_summary
+      - icon
+      - apparent_temperature
+      - apparent_temperature_high
+      - apparent_temperature_low
+  - platform: template
+    sensors:
+      pacifica_fuel_level:
+        friendly_name: "Pacifica fuel level"
+        unit_of_measurement: '%'
+        icon_template: mdi:gas-station
+        value_template: "{{ states.device_tracker['2017_chrysler_pacifica'].attributes.fuel_level }}"
+      fusion_fuel_level:
+        friendly_name: "Fusion fuel level"
+        unit_of_measurement: '%'
+        icon_template: mdi:gas-station
+        value_template: "{{ states.device_tracker['2019_ford_fusion_hybrid'].attributes.fuel_level }}"
+      climate_downstairs_combined:
+        value_template: "{{ states.climate.downstairs.attributes.target_temp_low }}/{{ states.climate.downstairs.attributes.target_temp_high }}"
+      local_time:
+       value_template: "{{as_timestamp(now()) | timestamp_custom('%-I:%M %p')}}"
+      local_date:
+       value_template: "{{as_timestamp(now()) | timestamp_custom('%A %B %-d')}}"
+      weather_overnight_low:
+       value_template: "{{ states.sensor.dark_sky_overnight_low_apparent_temperature.state|round }}"
+      weather_daytime_high:
+       value_template: "{{ states.sensor.dark_sky_daytime_high_apparent_temperature.state|round }}"
+      weather_current_temp:
+       value_template: "{{ states.sensor.dark_sky_apparent_temperature.state|round }}"
+      pacifica_mapped_fuel_level:
+       value_template: >-
+        {% if states.sensor.pacifica_fuel_level.state >= '95.0' %}
+         100
+        {% elif states.sensor.pacifica_fuel_level.state >= '85.0' %}
+         90
+        {% elif states.sensor.pacifica_fuel_level.state >= '75.0' %}
+         80
+        {% elif states.sensor.pacifica_fuel_level.state >= '65.0' %}
+         70
+        {% elif states.sensor.pacifica_fuel_level.state >= '55.0' %}
+         60
+        {% elif states.sensor.pacifica_fuel_level.state >= '45.0' %}
+         50
+        {% elif states.sensor.pacifica_fuel_level.state >= '35.0' %}
+         40
+        {% elif states.sensor.pacifica_fuel_level.state >= '25.0' %}
+         30
+        {% elif states.sensor.pacifica_fuel_level.state >= '15.0' %}
+         20
+        {% elif states.sensor.pacifica_fuel_level.state >= '5.0' %}
+         10
+        {% endif %}
+      fusion_mapped_fuel_level:
+       value_template: >-
+        {% if states.sensor.fusion_fuel_level.state >= '95.0' %}
+         100
+        {% elif states.sensor.fusion_fuel_level.state >= '85.0' %}
+         90
+        {% elif states.sensor.fusion_fuel_level.state >= '75.0' %}
+         80
+        {% elif states.sensor.fusion_fuel_level.state >= '65.0' %}
+         70
+        {% elif states.sensor.fusion_fuel_level.state >= '55.0' %}
+         60
+        {% elif states.sensor.fusion_fuel_level.state >= '45.0' %}
+         50
+        {% elif states.sensor.fusion_fuel_level.state >= '35.0' %}
+         40
+        {% elif states.sensor.fusion_fuel_level.state >= '25.0' %}
+         30
+        {% elif states.sensor.fusion_fuel_level.state >= '15.0' %}
+         20
+        {% elif states.sensor.fusion_fuel_level.state >= '5.0' %}
+         10
+        {% endif %}
+
+
+
+# Text to speech
+tts:
+  - platform: google
+
+# Cloud
+cloud:
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+
+
+camera:
+  - platform: foscam
+    ip: 192.168.1.28
+    port: 88
+    username: !secret foscam_1_username
+    password: !secret foscam_1_password
+    name: driveway
+
+  - platform: foscam
+    ip: 192.168.1.23
+    port: 88
+    username: !secret foscam_2_username
+    password: !secret foscam_2_password
+    name: harveys room
+
+  - platform: foscam
+    ip: 192.168.1.21
+    port: 88
+    username: !secret foscam_3_username
+    password: !secret foscam_3_password
+    name: olivers room
+
+  - platform: foscam
+    ip: 192.168.1.17
+    port: 88
+    username: !secret foscam_4_username
+    password: !secret foscam_4_password
+    name: driveway ptz
+
+  - platform: foscam
+    ip: 192.168.1.40
+    port: 88
+    username: !secret foscam_5_username
+    password: !secret foscam_5_password
+    name: front door
+
+  - platform: foscam
+    ip: 192.168.1.35
+    port: 88
+    username: !secret foscam_6_username
+    password: !secret foscam_6_password
+    name: garage
+
+
+abode:
+  username: !secret abode_username
+  password: !secret abode_password
+  name: Alarm System
+
+
+
+switch:
+  - platform: tplink
+    host: 192.168.1.26
+  - platform: tplink
+    host: 192.168.1.80
+  - platform: tplink
+    host: 192.168.1.86
+  - platform: tplink
+    host: 192.168.1.90
+  - platform: tplink
+    host: 192.168.1.88
+  - platform: tplink
+    host: 192.168.1.83
+  - platform: tplink
+    host: 192.168.1.36
+  - platform: tplink
+    host: 192.168.1.20
+  - platform: tplink
+    host: 192.168.1.37
+  - platform: tplink
+    host: 192.168.1.94
+  - platform: tplink
+    host: 192.168.1.8
+
+light:
+  - platform: tplink
+    host: 192.168.1.77
+  - platform: tplink
+    host: 192.168.1.76
+
+  - platform: tplink
+    host: 192.168.1.44
+  - platform: tplink
+    host: 192.168.1.42
+  - platform: tplink
+    host: 192.168.1.43
+  - platform: tplink
+    host: 192.168.1.41
+  - platform: tplink
+    host: 192.168.1.39
+
+ecobee:
+  api_key: !secret ecobee_key
+
+device_tracker:
+- platform: automatic
+  client_id: !secret automatic_id
+  secret: !secret automatic_secret
+  username: !secret icloud_username
+  password: !secret abode_password
+- platform: netgear
+  host: 192.168.1.1
+  port: 80
+  username: !secret netgear_username
+  password: !secret netgear_password
+  consider_home: 10
+  new_device_defaults:
+      track_new_devices: True
+      hide_if_away: False
+- platform: owntracks
+
+
+august:
+  login_method: email
+  username: !secret august_username
+  password: !secret august_password
+
+media_player:
+  - platform: roku
+
+remote:
+  - platform: harmony
+    host: 192.168.1.19
+    name: Living room TV
+    action: Watch TV

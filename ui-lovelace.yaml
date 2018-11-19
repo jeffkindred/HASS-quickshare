@@ -1,0 +1,864 @@
+title: " "
+# Include external resources
+resources:
+  - url: /local/scroll-up.js
+    type: js
+
+# Exclude entities from "Unused entities" view
+excluded_entities:
+views:
+     # Specify a tab icon if you want the view tab to be an icon.
+  - icon: mdi:home-outline
+    panel: true
+    cards:
+      - type: picture-elements
+        image: /local/layouts/view_default_1280x750.png
+        elements:
+
+### DATE AND TIME
+           - type: state-label
+             entity: sensor.local_time
+             style:
+               top: 8%
+               left: 2%
+               width: 2.5%
+               font-size: 2.8em
+               color: rgba(202,217,235,1)
+           - type: state-label
+             entity: sensor.local_date
+             style:
+               top: 11%
+               left: 82.5%
+               width: 300px
+               text-align: right
+               font-size: 1.5em
+               text-transform: uppercase
+               color: rgba(202,217,235,.75)
+
+
+### CLIMATE CONTROL
+           - type: state-label
+             entity: sensor.switch
+             prefix: Downstairs
+             style:
+               top: 25%
+               left: 2%
+               width: 2.5%
+               font-size: 1.4em
+               font-style: italic
+               color: rgba(202,217,235,.25)
+
+
+           - type: state-label
+             entity: climate.downstairs
+             style:
+               top: 29%
+               left: 4.5%
+               width: 80px
+               font-size: 1.7em
+               font-weight: bold
+               text-transform: capitalize
+               color: rgba(202,217,235,.75)
+
+           - type: state-label
+             entity: sensor.climate_downstairs_combined
+             style:
+               top: 29.2%
+               left: 13%
+               width: 100px
+               text-align: left
+               font-size: 1.2em
+               font-weight: bold
+               color: rgba(202,217,235,.75)
+
+### ALARM SYSTEM STATUS
+           - type: state-label
+             entity: alarm_control_panel.alarm_system
+             prefix: "Alarm - "
+             style:
+               top: 14%
+               left: 8%
+               font-size: 1.2em
+               color: rgba(202,217,235,.75)
+
+
+
+### VEHICLE LOCATIONS
+           - type: state-label
+             entity: device_tracker.2017_chrysler_pacifica
+             style:
+               top: 69%
+               left: 55%
+               width: 180px
+               font-size: 1.2em
+               font-style: italic
+               color: rgba(202,217,235,.35)
+           - type: state-label
+             entity: device_tracker.2019_ford_fusion_hybrid
+             style:
+               top: 80%
+               left: 55%
+               width: 180px
+               font-style: italic
+               font-size: 1.2em
+               color: rgba(202,217,235,.35)
+
+### FLOORPLAN LIGHTS
+           - type: image
+             entity: switch.office_light
+             tap_action: toggle
+             image: /local/assets/lightbulb.png
+             state_image:
+              "off": /local/assets/lightbulb.png
+              "on": /local/assets/lightbulb_on.png
+             style:
+              top: 91.5%
+              left: 32.6%
+              width: 3%
+
+           - type: image
+             entity: switch.dining_room_light
+             tap_action: toggle
+             image: /local/assets/lightbulb.png
+             state_image:
+              "off": /local/assets/lightbulb.png
+              "on": /local/assets/lightbulb_on.png
+             style:
+              top: 39%
+              left: 43.7%
+              width: 3%
+
+           - type: image
+             entity: switch.hall_lights
+             tap_action: toggle
+             image: /local/assets/lightbulb.png
+             state_image:
+              "off": /local/assets/lightbulb.png
+              "on": /local/assets/lightbulb_on.png
+             style:
+              top: 69%
+              left: 40%
+              width: 3%
+
+           - type: image
+             entity: switch.kitchen_pendants
+             tap_action: toggle
+             hold_action: more-info
+             image: /local/assets/lightbulb.png
+             state_image:
+              "off": /local/assets/lightbulb.png
+              "on": /local/assets/lightbulb_on.png
+             style:
+              top: 39%
+              left: 39.7%
+              width: 3%
+
+           - type: image
+             entity: switch.kitchen_light
+             tap_action: toggle
+             image: /local/assets/lightbulb.png
+             state_image:
+              "off": /local/assets/lightbulb.png
+              "on": /local/assets/lightbulb_on.png
+             style:
+              top: 39%
+              left: 32.6%
+              width: 3%
+
+           - type: image
+             entity: group.stairlights
+             tap_action: toggle
+             hold_action: more-info
+             image: /local/assets/lightbulb.png
+             state_image:
+              "off": /local/assets/lightbulb.png
+              "on": /local/assets/lightbulb_on.png
+             style:
+              top: 56%
+              left: 30.5%
+              width: 3%
+
+           - type: image
+             entity: switch.harveys_light
+             tap_action: toggle
+             image: /local/assets/lightbulb.png
+             state_image:
+              "off": /local/assets/lightbulb.png
+              "on": /local/assets/lightbulb_on.png
+             style:
+              top: 70%
+              left: 88%
+              width: 3%
+
+           - type: image
+             entity: switch.olivers_light
+             tap_action: toggle
+             image: /local/assets/lightbulb.png
+             state_image:
+              "off": /local/assets/lightbulb.png
+              "on": /local/assets/lightbulb_on.png
+             style:
+              top: 50%
+              left: 91%
+              width: 3%
+
+           - type: image
+             entity: switch.master_light
+             tap_action: toggle
+             image: /local/assets/lightbulb.png
+             state_image:
+              "off": /local/assets/lightbulb.png
+              "on": /local/assets/lightbulb_on.png
+             style:
+              top: 29.5%
+              left: 68.5%
+              width: 3%
+
+           - type: image
+             entity: switch.garage_light
+             tap_action: toggle
+             image: /local/assets/lightbulb.png
+             state_image:
+              "off": /local/assets/lightbulb.png
+              "on": /local/assets/lightbulb_on.png
+             style:
+              top: 53%
+              left: 54%
+              width: 3%
+
+           - type: image
+             entity: switch.christmas_tree
+             tap_action: toggle
+             state_image:
+              "off": /local/assets/christmas_tree.png
+              "on": /local/assets/christmas_tree_on.png
+             style:
+              top: 43.5%
+              left: 61.5%
+              width: 3%
+
+### FLOORPLAN FANS
+           - type: image
+             entity: switch.living_room_fan
+             image: /local/assets/fan.png
+             tap_action: toggle
+             state_image:
+              "on": /local/assets/fan_on.png
+             style:
+              top: 40%
+              left: 56%
+              width: 5%
+
+           - type: image
+             entity: switch.master_fan
+             image: /local/assets/fan.png
+             tap_action: toggle
+             state_image:
+              "on": /local/assets/fan_on.png
+             style:
+              top: 35%
+              left: 72.3%
+              width: 4%
+
+           - type: image
+             entity: switch.bedroom_fan
+             image: /local/assets/fan.png
+             tap_action: toggle
+             state_image:
+              "on": /local/assets/fan_on.png
+             style:
+              top: 20%
+              left: 76%
+              width: 3%
+
+
+### FLOORPLAN MOTION
+           - type: image
+             entity: binary_sensor.office_occupancy
+             image: /local/assets/motion.png
+             state_image:
+              "off": /local/assets/motion.png
+              "on": /local/assets/motion_detected.png
+             style:
+              top: 80.6%
+              left: 32.7%
+              width: 1.5%
+
+           - type: image
+             entity: binary_sensor.downstairs_occupancy
+             image: /local/assets/motion.png
+             state_image:
+              "off": /local/assets/motion.png
+              "on": /local/assets/motion_detected.png
+             style:
+              top: 29%
+              left: 45.5%
+              width: 1.5%
+
+           - type: image
+             entity: binary_sensor.master_bedroom_occupancy
+             image: /local/assets/motion.png
+             state_image:
+              "off": /local/assets/motion.png
+              "on": /local/assets/motion_detected.png
+             style:
+              top: 20.5%
+              left: 72.3%
+              width: 1.5%
+
+           - type: image
+             entity: binary_sensor.olivers_room_occupancy
+             image: /local/assets/motion.png
+             state_image:
+              "off": /local/assets/motion.png
+              "on": /local/assets/motion_detected.png
+             style:
+              top: 41%
+              left: 91%
+              width: 1.5%
+
+           - type: image
+             entity: binary_sensor.harveys_room_occupancy
+             image: /local/assets/motion.png
+             state_image:
+              "off": /local/assets/motion.png
+              "on": /local/assets/motion_detected.png
+             style:
+              top: 58%
+              left: 88%
+              width: 1.5%
+
+
+### WEATHER BOX
+           - type: state-label
+             entity: sensor.weather_current_temp
+             suffix: °F
+             style:
+              top: 9%
+              left: 35.5%
+              width: 150px
+              text-align: left
+              font-size: 2.8em
+              color: rgba(202,217,235,1)
+              font-weight: bold
+
+           - type: state-label
+             entity: sensor.weather_overnight_low
+             style:
+              top: 10.5%
+              left: 39.5%
+              width: 40px
+              text-align: left
+              font-size: 1.3em
+              color: rgba(164,196,233,1)
+
+           - type: state-label
+             entity: sensor.weather_daytime_high
+             style:
+              top: 7.7%
+              left: 39.5%
+              width: 40px
+              text-align: left
+              font-size: 1.3em
+              color: rgba(245,166,35,.55)
+
+           - type: state-label
+             entity: sensor.dark_sky_minutely_summary
+             style:
+              top: 13.4%
+              left: 45.5%
+              width: 350px
+              text-align: left
+              font-style: italic
+              font-size: 1em
+              overflow: hidden
+              color: rgba(202,217,235,1)
+
+
+        # dark sky will return the following "icon states" that need to be mapped using state-image
+        # clear-day, clear-night, rain, snow, sleet, wind, fog, cloudy, partly-cloudy-day, or partly-cloudy-night
+           - type: image
+             entity: sensor.dark_sky_icon
+             image: /local/assets/weather/weather_cloudy.png
+             state_image:
+               "clear-day": /local/assets/weather/weather_clear.png
+               "clear-night": /local/assets/weather/weather_clearnight.png
+               "rain": /local/assets/weather/weather_rain.png
+               "snow": /local/assets/weather/weather_snow.png
+               "sleet": /local/assets/weather/weather_sleet.png
+               "wind": /local/assets/weather/weather_windy.png
+               "fog": /local/assets/weather/weather_fog.png
+               "partly-cloudy-day": /local/assets/weather/weather_partlycloudy.png
+               "partly-cloudy-night": /local/assets/weather/weather_cloudy.png
+             style:
+              top: 10%
+              left: 24%
+              width: 70px
+              font-size: 70px
+              color: rgba(202,217,235,.75)
+
+### ROOM TEMPERATURES
+           - type: state-label
+             entity: sensor.office_temperature
+             style:
+              top: 84.3%
+              left: 33%
+              font-size: .8em
+              color: rgba(202,217,235,.5)
+
+           - type: state-label
+             entity: sensor.downstairs_temperature
+             style:
+              top: 49%
+              left: 41%
+              font-size: .8em
+              color: rgba(202,217,235,.5)
+
+           - type: state-label
+             entity: sensor.master_bedroom_temperature
+             style:
+              top: 24.2%
+              left: 72.6%
+              font-size: .8em
+              color: rgba(202,217,235,.5)
+
+           - type: state-label
+             entity: sensor.olivers_room_temperature
+             style:
+              top: 43.8%
+              left: 91.3%
+              font-size: .8em
+              color: rgba(202,217,235,.5)
+
+           - type: state-label
+             entity: sensor.harveys_room_temperature
+             style:
+              top: 62%
+              left: 88.3%
+              font-size: .8em
+              color: rgba(202,217,235,.5)
+
+
+### FUEL GAUGES
+           - type: image
+             entity: sensor.pacifica_mapped_fuel_level
+             image: /local/assets/fuel/fuel_0.png
+             state_image:
+              "100": /local/assets/fuel/fuel_100.png
+              "90": /local/assets/fuel/fuel_90.png
+              "80": /local/assets/fuel/fuel_80.png
+              "70": /local/assets/fuel/fuel_70.png
+              "60": /local/assets/fuel/fuel_60.png
+              "50": /local/assets/fuel/fuel_50.png
+              "40": /local/assets/fuel/fuel_40.png
+              "30": /local/assets/fuel/fuel_30.png
+              "20": /local/assets/fuel/fuel_20.png
+              "10": /local/assets/fuel/fuel_10.png
+             style:
+              top: 65.5%
+              left: 56.3%
+              width: 9%
+              opacity: .5
+
+           - type: image
+             entity: sensor.fusion_mapped_fuel_level
+             image: /local/assets/fuel/fuel_100.png
+             state_image:
+              "100": /local/assets/fuel/fuel_100.png
+              "90": /local/assets/fuel/fuel_90.png
+              "80": /local/assets/fuel/fuel_80.png
+              "70": /local/assets/fuel/fuel_70.png
+              "60": /local/assets/fuel/fuel_60.png
+              "50": /local/assets/fuel/fuel_50.png
+              "40": /local/assets/fuel/fuel_40.png
+              "30": /local/assets/fuel/fuel_30.png
+              "20": /local/assets/fuel/fuel_20.png
+              "10": /local/assets/fuel/fuel_10.png
+             style:
+              top: 76.4%
+              left: 56.3%
+              width: 9%
+              opacity: .5
+
+
+
+### BOTTOM RIGHT BUTTON CLUSTER
+           - type: image
+             entity: camera.driveway_ptz
+             image: /local/assets/button_short_invisible.png
+             style:
+              top: 97%
+              left: 91%
+              width: 19%
+           - type: image
+             entity: camera.harveys_room
+             image: /local/assets/button_short_invisible.png
+             style:
+               top: 90%
+               left: 91%
+               width: 19%
+           - type: image
+             entity: camera.olivers_room
+             image: /local/assets/button_short_invisible.png
+             style:
+              top: 83.1%
+              left: 91%
+              width: 19%
+
+### LEFT BUTTON CLUSTER
+           - type: image
+             entity: lock.front_door
+             tap_action: toggle
+             image: /local/assets/button_status.png
+             state_image:
+              "locked": /local/assets/button_status_on.png
+             style:
+              top: 37.9%
+              left: 12.6%
+              width: 25%
+
+           - type: image
+             entity: switch.hall_lights
+             tap_action: toggle
+             image: /local/assets/button_status.png
+             state_image:
+              "on": /local/assets/button_status_on.png
+             style:
+              top: 44.3%
+              left: 12.6%
+              width: 25%
+
+           - type: image
+             entity: switch.kitchen_light
+             tap_action: toggle
+             image: /local/assets/button_status.png
+             state_image:
+              "on": /local/assets/button_status_on.png
+             style:
+              top: 50.7%
+              left: 12.6%
+              width: 25%
+
+           - type: image
+             entity: switch.dining_room_light
+             tap_action: toggle
+             image: /local/assets/button_status.png
+             state_image:
+              "on": /local/assets/button_status_on.png
+             style:
+              top: 57.4%
+              left: 12.6%
+              width: 25%
+
+           - type: image
+             entity: switch.living_room_fan
+             tap_action: toggle
+             image: /local/assets/button_status.png
+             state_image:
+              "on": /local/assets/button_status_on.png
+             style:
+              top: 64.1%
+              left: 12.6%
+              width: 25%
+
+           - type: image
+             entity: remote.living_room_tv
+             image: /local/assets/button_status.png
+             state_image:
+              "on": /local/assets/button_status_on.png
+             style:
+              top: 70.4%
+              left: 12.6%
+              width: 25%
+
+
+
+
+
+
+
+### DOOR STATUS
+           - type: image
+             entity: binary_sensor.front_door
+             image: /local/assets/doors/door_front.png
+             state_image:
+              "on": /local/assets/doors/door_front_open.png
+             style:
+              top: 87.9%
+              left: 39.9%
+              width: 5%
+
+           - type: image
+             entity: binary_sensor.garage_door
+             image: /local/assets/doors/door_garage.png
+             state_image:
+              "on": /local/assets/doors/door_garage_open.png
+             style:
+              top: 87.9%
+              left: 53.3%
+              width: 19%
+
+           - type: image
+             entity: binary_sensor.slider
+             image: /local/assets/doors/door_slider.png
+             state_image:
+              "on": /local/assets/doors/door_slider_open.png
+             style:
+              top: 25%
+              left: 40.9%
+              width: 8%
+
+           - type: image
+             entity: binary_sensor.garage_entry
+             image: /local/assets/doors/door_garage_entry.png
+             state_image:
+              "on": /local/assets/doors/door_garage_entry_open.png
+             style:
+              top: 58%
+              left: 42.6%
+              width: .8%
+
+### SPEEDTEST
+
+           - type: state-label
+             entity: sensor.speedtest_ping
+             prefix: "ping: "
+             style:
+               top: 98.5%
+               left: 74%
+               font-size: 1em
+               text-align: left
+               width: 160px
+               color: rgba(202,217,235,.25)
+               font-style: italic
+
+           - type: state-label
+             entity: sensor.speedtest_download
+             prefix: "dl: "
+             style:
+               top: 98.5%
+               left: 49%
+               font-size: 1em
+               text-align: left
+               width: 160px
+               color: rgba(202,217,235,.25)
+               font-style: italic
+
+           - type: state-label
+             entity: sensor.speedtest_upload
+             prefix: "ul: "
+             style:
+               top: 98.5%
+               left: 63%
+               font-size: 1em
+               text-align: left
+               width: 160px
+               color: rgba(202,217,235,.25)
+               font-style: italic
+
+  - title: Clock
+    icon: mdi:clock-outline
+    panel: true
+    cards:
+      - type: picture-elements
+        image: /local/layouts/view_nightstand_1280x655.png
+        elements:
+        - type: state-label
+          entity: sensor.dark_sky_minutely_summary
+          tap_action: none
+          style:
+            top: 96%
+            left: 72%
+            font-size: 1.2em
+            width: 500px
+            text-align: right
+            color: rgba(202,217,235,.25)
+            font-style: italic
+
+
+        - type: state-label
+          entity: sensor.weather_current_temp
+          suffix: °F
+          tap_action: none
+          style:
+           top: 90.8%
+           left: 80%
+           width: 150px
+           text-align: right
+           font-size: 2.8em
+           color: rgba(202,217,235,.15)
+
+        # dark sky will return the following "icon states" that need to be mapped using state-image
+        # clear-day, clear-night, rain, snow, sleet, wind, fog, cloudy, partly-cloudy-day, or partly-cloudy-night
+        - type:  image
+          entity: sensor.dark_sky_icon
+          tap_action: none
+          image: /local/assets/weather/weather_cloudy.png
+          state_image:
+           "clear-day": /local/assets/weather/weather_clear.png
+           "clear-night": /local/assets/weather/weather_clearnight.png
+           "rain": /local/assets/weather/weather_rain.png
+           "snow": /local/assets/weather/weather_snow.png
+           "sleet": /local/assets/weather/weather_sleet.png
+           "wind": /local/assets/weather/weather_windy.png
+           "fog": /local/assets/weather/weather_fog.png
+           "partly-cloudy-day": /local/assets/weather/weather_partlycloudy.png
+           "partly-cloudy-night": /local/assets/weather/weather_cloudy.png
+          style:
+            top: 90%
+            left: 94%
+            width: 49px
+            opacity: .1
+
+
+        - type: state-label
+          entity: sensor.master_bedroom_temperature
+          tap_action: none
+          style:
+            top: 75%
+            left: 50%
+            font-size: 2.8em
+            color: rgba(202,217,235,.25)
+
+
+        - type: state-label
+          entity: sensor.weather_overnight_low
+          style:
+           top: 92.5%
+           left: 89%
+           width: 40px
+           text-align: left
+           font-size: 1.3em
+           color: rgba(164,196,233,.5)
+
+        - type: state-label
+          entity: sensor.weather_daytime_high
+          style:
+           top: 89.5%
+           left: 89%
+           width: 40px
+           text-align: left
+           font-size: 1.3em
+           color: rgba(245,166,35,.25)
+
+
+
+        - type: image
+          entity: camera.driveway_ptz
+          image: /local/assets/button_short_invisible.png
+          style:
+           top: 97%
+           left: 9%
+           width: 19%
+        - type: image
+          entity: camera.harveys_room
+          image: /local/assets/button_short_invisible.png
+          style:
+            top: 90%
+            left: 9%
+            width: 19%
+        - type: image
+          entity: camera.olivers_room
+          image: /local/assets/button_short_invisible.png
+          style:
+           top: 83.1%
+           left: 9%
+           width: 19%
+
+
+
+        - type: state-label
+          entity: sensor.local_time
+          tap_action: none
+          style:
+           top: 30%
+           left: 50%
+           font-size: 15em
+           font-weight: 100
+           color: rgba(202,217,235,.75)
+
+        - type: state-label
+          entity: sensor.local_date
+          tap_action: none
+          style:
+           top: 59%
+           left: 50%
+           font-size: 2em
+           text-transform: uppercase
+           letter-spacing: 10px
+           color: rgba(202,217,235,.5)
+
+### ALARM SYSTEM STATUS
+        - type: state-label
+          entity: alarm_control_panel.alarm_system
+          prefix: "Alarm - "
+          style:
+           top: 90%
+           left: 50%
+           font-size: 1.2em
+           color: rgba(202,217,235,.15)
+
+
+
+#   - title: Remote
+#     icon: mdi:television-classic
+#     panel: true
+#     cards:
+#     - type: picture-elements
+#       image: /local/assets/generic_background_1280x750.png
+#       elements:
+#       - type: state-label
+#         entity: climate.downstairs
+#         style:
+#          top: 30%
+#          left: 30%
+#          width: 50%
+#          font-size: 1.2em
+#          color: rgba(202,217,235,.15)
+
+
+
+
+  - title: Cameras
+    icon: mdi:video
+    panel: true
+    cards:
+    - type: picture-elements
+      image: /local/assets/generic_background_1280x750.png
+      elements:
+      - type: image
+        entity: camera.driveway_ptz
+        camera_image: camera.driveway_ptz
+        style:
+         top: 25%
+         left: 25%
+         width: 49%
+
+      - type: image
+        entity: camera.garage
+        camera_image: camera.garage
+        style:
+         top: 25%
+         left: 75%
+         width: 49%
+
+      - type: image
+        entity: camera.harveys_room
+        camera_image: camera.harveys_room
+        style:
+         top: 75%
+         left: 25%
+         width: 49%
+
+      - type: image
+        entity: camera.olivers_room
+        camera_image: camera.olivers_room
+        style:
+         top: 75%
+         left: 75%
+         width: 49%
+
+
+
+
+       
